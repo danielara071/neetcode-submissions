@@ -1,0 +1,23 @@
+import math
+class Solution:
+    def evalRPN(self, tokens: List[str]) -> int:
+        operations = "+-*/"
+        stack = []
+        for token in tokens:
+            if token in operations:
+                b, a = stack.pop(), stack.pop()
+                if token == "+":
+                    stack.append(b + a)
+                elif token == "-":
+                    stack.append( a - b)
+                elif token == "*":
+                    stack.append(a * b)
+                else:
+                    div = a / b
+                    if div > 0:
+                        stack.append(math.floor(div))
+                    else:
+                        stack.append(math.ceil(div))
+            else:
+                stack.append(int(token))
+        return stack[0]

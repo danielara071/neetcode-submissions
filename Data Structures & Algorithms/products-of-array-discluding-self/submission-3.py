@@ -1,0 +1,15 @@
+class Solution:
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        n = len(nums)
+        lmult = [0] * n
+        rmult = [0] * n
+        left = 1
+        right = 1
+        for i in range(n):
+            j = -i - 1 
+            lmult[i] = left
+            rmult[j] = right
+            left *= nums[i]
+            right *= nums[j]
+        
+        return [l * r for l, r in zip(lmult, rmult)]
